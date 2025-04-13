@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../stylesheets/UserSignUp.css';
+import '../../stylesheets/auth/captain.css';
 import axios from 'axios';
 
 const CaptainSignup = () => {
@@ -52,7 +52,7 @@ const CaptainSignup = () => {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, newCaptain);
 
       if (response.status === 201) {
-        navigate('/captain-login');
+        navigate('/CaptainHome');
       } else {
         console.error(response.data.message);
       }

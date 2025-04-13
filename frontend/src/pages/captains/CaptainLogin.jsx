@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../stylesheets/UserSignUp.css';
+import '../../stylesheets/auth/captain.css';
 import axios from 'axios';
 
 const CaptainLogin = () => {
@@ -24,7 +24,9 @@ const CaptainLogin = () => {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, formData);
 
       if (response.status === 200) {
-        navigate('/captain-dashboard');
+        const data = response.data;
+        localStorage.setItem("token", data.token);
+        navigate('/CaptainHome');
       } else {
         console.error(response.data.message);
       }

@@ -1,0 +1,117 @@
+@import '../common/global.css';
+
+.start-container {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+        url('https://plus.unsplash.com/premium_photo-1682834983265-27a10ba5232c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+}
+
+.start-container .logo {
+    color: white !important;
+    font-size: 4rem;
+}
+
+.start-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2rem;
+    max-width: 600px;
+}
+
+.start-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.start-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.continue-button {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.continue-button:hover {
+    background-color: #EEEEEE;
+    transform: translateY(-1px);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .start-content {
+        padding: 0 1.5rem;
+    }
+
+    .start-title {
+        font-size: 2.75rem;
+    }
+
+    .start-container .logo {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .start-content {
+        padding: 0 1rem;
+    }
+
+    .start-title {
+        font-size: 2.25rem;
+    }
+
+    .start-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .continue-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .start-container .logo {
+        font-size: 2.5rem;
+    }
+}
+
+/* Height-based media queries */
+@media screen and (max-height: 600px) {
+    .start-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .start-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .continue-button {
+        padding: 0.75rem 1.5rem;
+    }
+} 

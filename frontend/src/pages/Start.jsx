@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../stylesheets/Start.css';
+import '../stylesheets/pages/start.css';
 
 const Start = () => {
   return (

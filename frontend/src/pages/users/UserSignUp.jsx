@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../stylesheets/UserSignUp.css';
+import '../../stylesheets/auth/auth.css';
 import axios from 'axios';
-
-import {UserDataContext} from '../context/UserContext';
+import { UserDataContext } from '../../context/UserContext';
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState({
@@ -43,6 +42,7 @@ const UserSignUp = () => {
       if (response.status === 201) {
         const data = response.data;
         setUser(data.user);
+        localStorage.setItem("token", data.token);
         navigate('/home');
       } else {
         console.log(response.data.message);

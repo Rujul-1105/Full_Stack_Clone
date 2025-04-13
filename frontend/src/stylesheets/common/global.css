@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    padding: 2rem 2rem 1.5rem;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .logo {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+        padding: 1.25rem 1.25rem 0.75rem;
+    }
+} 
