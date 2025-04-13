@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/UserSignUp.css';
+import axios from 'axios';
+
+import {UserDataContext} from '../context/UserContext';
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +15,9 @@ const UserSignUp = () => {
     confirmPassword: ''
   });
 
+  const navigate = useNavigate();
+  const [user, setUser] = useContext(UserDataContext);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,10 +25,31 @@ const UserSignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    
+    try {
+      const newUser = {
+        fullname: {
+          firstname: formData.firstName,
+          lastname: formData.lastName
+        },
+        email: formData.email,
+        password: formData.password
+      };
+
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
+
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        navigate('/home');
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
   };
 
   return (
@@ -68,31 +95,11 @@ const UserSignUp = () => {
             </div>
             <div className="form-group">
               <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm Password"
                 required
               />
             </div>

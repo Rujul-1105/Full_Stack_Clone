@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/UserSignUp.css';
+import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
 
 const UserLogin = () => {
   const [formData, setFormData] = useState({
-    emailOrPhone: '',
+    email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
+  const [user, setUser] = useContext(UserDataContext);
 
   const handleChange = (e) => {
     setFormData({
@@ -15,10 +20,21 @@ const UserLogin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, formData);
+
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        navigate('/home');
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   return (
@@ -32,11 +48,11 @@ const UserLogin = () => {
           <form onSubmit={handleSubmit} className="signup-form">
             <div className="form-group">
               <input
-                type="text"
-                name="emailOrPhone"
-                value={formData.emailOrPhone}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                placeholder="Email or phone number"
+                placeholder="Email"
                 required
               />
             </div>

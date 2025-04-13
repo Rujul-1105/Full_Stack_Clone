@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/UserSignUp.css';
+import axios from 'axios';
 
 const CaptainLogin = () => {
   const [formData, setFormData] = useState({
-    emailOrPhone: '',
+    email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -15,10 +18,19 @@ const CaptainLogin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, formData);
+
+      if (response.status === 200) {
+        navigate('/captain-dashboard');
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   return (
@@ -27,16 +39,16 @@ const CaptainLogin = () => {
       <div className="signup-content">
         <div className="signup-form-wrapper">
           <h1 className="signup-title">Welcome back, Driver</h1>
-          <p className="signup-subtitle">Sign in to start earning with Uber</p>
+          <p className="signup-subtitle">Sign in to start accepting rides</p>
 
           <form onSubmit={handleSubmit} className="signup-form">
             <div className="form-group">
               <input
-                type="text"
-                name="emailOrPhone"
-                value={formData.emailOrPhone}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                placeholder="Email or phone number"
+                placeholder="Email"
                 required
               />
             </div>
@@ -52,7 +64,7 @@ const CaptainLogin = () => {
             </div>
 
             <button type="submit" className="signup-button">
-              Sign In
+              Sign In as Driver
             </button>
           </form>
 

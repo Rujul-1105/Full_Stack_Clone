@@ -8,14 +8,14 @@ const UserContext = ({ children }) => {
             firstname:"",
             lastname:""
         },
-    })
+        email: "",
+    });
 
-
-  return (
-    <div>
-      <UserDataContext.Provider value="">{children}</UserDataContext.Provider>
-    </div>
-  );
+    return (
+        <UserDataContext.Provider value={[user, setUser]}>
+            {children}
+        </UserDataContext.Provider>
+    );
 };
 
 export default UserContext;

@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/UserSignUp.css';
+import axios from 'axios';
 
 const CaptainSignup = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    phone: '',
-    vehicleType: '',
+    vehicleType: 'car',
+    vehicleColor: '',
     vehicleNumber: '',
-    licenseNumber: '',
+    vehicleCapacity: '',
     password: '',
     confirmPassword: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -22,10 +25,40 @@ const CaptainSignup = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    try {
+      const newCaptain = {
+        fullname: {
+          firstname: formData.firstName,
+          lastname: formData.lastName
+        },
+        email: formData.email,
+        password: formData.password,
+        vehicle: {
+          type: formData.vehicleType,
+          color: formData.vehicleColor,
+          number: formData.vehicleNumber,
+          capacity: parseInt(formData.vehicleCapacity)
+        },
+        status: "offline"
+      };
+
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/register`, newCaptain);
+
+      if (response.status === 201) {
+        navigate('/captain-login');
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
   };
 
   return (
@@ -70,28 +103,26 @@ const CaptainSignup = () => {
               />
             </div>
             <div className="form-group">
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                required
-              />
-            </div>
-            <div className="form-group">
               <select
                 name="vehicleType"
                 value={formData.vehicleType}
                 onChange={handleChange}
                 required
-                className="select-input"
               >
-                <option value="">Select Vehicle Type</option>
                 <option value="car">Car</option>
                 <option value="bike">Bike</option>
                 <option value="auto">Auto</option>
               </select>
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="vehicleColor"
+                value={formData.vehicleColor}
+                onChange={handleChange}
+                placeholder="Vehicle Color"
+                required
+              />
             </div>
             <div className="form-group">
               <input
@@ -105,11 +136,12 @@ const CaptainSignup = () => {
             </div>
             <div className="form-group">
               <input
-                type="text"
-                name="licenseNumber"
-                value={formData.licenseNumber}
+                type="number"
+                name="vehicleCapacity"
+                value={formData.vehicleCapacity}
                 onChange={handleChange}
-                placeholder="Driver's License Number"
+                placeholder="Vehicle Capacity"
+                min="1"
                 required
               />
             </div>
