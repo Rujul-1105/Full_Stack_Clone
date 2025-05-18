@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../../stylesheets/auth/captain.css';
 import axios from 'axios';
 
 const CaptainSignup = () => {
@@ -62,16 +61,22 @@ const CaptainSignup = () => {
   };
 
   return (
-    <div className="signup-container captain">
-      <div className="logo">Uber</div>
-      <div className="signup-content">
-        <div className="signup-form-wrapper">
-          <h1 className="signup-title">Drive with Uber</h1>
-          <p className="signup-subtitle">Sign up to start earning with Uber</p>
+    <div className="min-h-screen w-full bg-black flex flex-col text-white overflow-x-hidden">
+      <div className="text-2xl font-bold py-8 px-8 -tracking-[0.5px]">
+        Uber
+      </div>
+      <div className="w-full px-8 flex flex-col items-center flex-1">
+        <div className="w-full max-w-md mx-auto p-4 bg-black rounded-xl">
+          <h1 className="text-4xl font-bold mb-3 -tracking-[0.5px] text-white">
+            Drive with Uber
+          </h1>
+          <p className="text-lg mb-8 text-gray-400">
+            Sign up to start earning with Uber
+          </p>
 
-          <form onSubmit={handleSubmit} className="signup-form">
-            <div className="name-group">
-              <div className="form-group">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
+            <div className="flex gap-4">
+              <div className="flex-1">
                 <input
                   type="text"
                   name="firstName"
@@ -79,9 +84,10 @@ const CaptainSignup = () => {
                   onChange={handleChange}
                   placeholder="First name"
                   required
+                  className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
                 />
               </div>
-              <div className="form-group">
+              <div className="flex-1">
                 <input
                   type="text"
                   name="lastName"
@@ -89,10 +95,11 @@ const CaptainSignup = () => {
                   onChange={handleChange}
                   placeholder="Last name"
                   required
+                  className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
                 />
               </div>
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="email"
                 name="email"
@@ -100,21 +107,23 @@ const CaptainSignup = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <select
                 name="vehicleType"
                 value={formData.vehicleType}
                 onChange={handleChange}
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e')] bg-no-repeat bg-[length:1em] bg-[right_1rem_center]"
               >
                 <option value="car">Car</option>
                 <option value="bike">Bike</option>
                 <option value="auto">Auto</option>
               </select>
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="text"
                 name="vehicleColor"
@@ -122,9 +131,10 @@ const CaptainSignup = () => {
                 onChange={handleChange}
                 placeholder="Vehicle Color"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="text"
                 name="vehicleNumber"
@@ -132,20 +142,21 @@ const CaptainSignup = () => {
                 onChange={handleChange}
                 placeholder="Vehicle Number"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="number"
                 name="vehicleCapacity"
                 value={formData.vehicleCapacity}
                 onChange={handleChange}
                 placeholder="Vehicle Capacity"
-                min="1"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="password"
                 name="password"
@@ -153,9 +164,10 @@ const CaptainSignup = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="password"
                 name="confirmPassword"
@@ -163,20 +175,21 @@ const CaptainSignup = () => {
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
 
-            <button type="submit" className="signup-button">
+            <button type="submit" className="w-full py-4 mt-4 bg-white text-black text-base font-medium rounded-lg transition-all hover:bg-gray-100">
               Sign Up as Driver
             </button>
           </form>
 
-          <div className="auth-options">
-            <Link to="/captain-login" className="auth-link">
+          <div className="text-center mt-6">
+            <Link to="/captain-login" className="inline-block text-white text-sm transition-colors hover:text-gray-300 py-3">
               Already have a driver account? Log in
             </Link>
-            <div className="divider">or</div>
-            <Link to="/user-signup" className="captain-link">
+            <div className="text-sm text-gray-500 my-4">or</div>
+            <Link to="/user-signup" className="inline-block text-white text-sm transition-colors hover:text-gray-300 py-3">
               Sign up as a Rider instead
             </Link>
           </div>

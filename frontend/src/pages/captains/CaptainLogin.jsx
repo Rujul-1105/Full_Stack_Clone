@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../../stylesheets/auth/captain.css';
 import axios from 'axios';
 
 const CaptainLogin = () => {
@@ -36,15 +35,21 @@ const CaptainLogin = () => {
   };
 
   return (
-    <div className="signup-container captain">
-      <div className="logo">Uber</div>
-      <div className="signup-content">
-        <div className="signup-form-wrapper">
-          <h1 className="signup-title">Welcome back, Driver</h1>
-          <p className="signup-subtitle">Sign in to start accepting rides</p>
+    <div className="min-h-screen w-full bg-black flex flex-col text-white overflow-x-hidden">
+      <div className="text-2xl font-bold py-8 px-8 -tracking-[0.5px]">
+        Uber
+      </div>
+      <div className="w-full px-8 flex flex-col items-center flex-1">
+        <div className="w-full max-w-md mx-auto p-4 bg-black rounded-xl">
+          <h1 className="text-4xl font-bold mb-3 -tracking-[0.5px] text-white">
+            Welcome back, Driver
+          </h1>
+          <p className="text-lg mb-8 text-gray-400">
+            Sign in to start accepting rides
+          </p>
 
-          <form onSubmit={handleSubmit} className="signup-form">
-            <div className="form-group">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
+            <div>
               <input
                 type="email"
                 name="email"
@@ -52,9 +57,10 @@ const CaptainLogin = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="password"
                 name="password"
@@ -62,20 +68,21 @@ const CaptainLogin = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 required
+                className="w-full px-4 py-4 border border-gray-700 rounded-lg bg-gray-900 text-white text-base transition-all focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder-gray-500"
               />
             </div>
 
-            <button type="submit" className="signup-button">
+            <button type="submit" className="w-full py-4 mt-4 bg-white text-black text-base font-medium rounded-lg transition-all hover:bg-gray-100">
               Sign In as Driver
             </button>
           </form>
 
-          <div className="auth-options">
-            <Link to="/captain-signup" className="auth-link">
+          <div className="text-center mt-6">
+            <Link to="/captain-signup" className="inline-block text-white text-sm transition-colors hover:text-gray-300 py-3">
               Don't have a driver account? Sign up
             </Link>
-            <div className="divider">or</div>
-            <Link to="/user-login" className="captain-link">
+            <div className="text-sm text-gray-500 my-4">or</div>
+            <Link to="/user-login" className="inline-block text-white text-sm transition-colors hover:text-gray-300 py-3">
               Sign in as a Rider instead
             </Link>
           </div>

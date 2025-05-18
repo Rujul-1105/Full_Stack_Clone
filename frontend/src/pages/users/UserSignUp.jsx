@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../../stylesheets/auth/auth.css';
 import axios from 'axios';
 import { UserDataContext } from '../../context/UserContext';
 
@@ -53,16 +52,22 @@ const UserSignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <div className="logo">Uber</div>
-      <div className="signup-content">
-        <div className="signup-form-wrapper">
-          <h1 className="signup-title">Create your account</h1>
-          <p className="signup-subtitle">Sign up to start riding with Uber</p>
+    <div className="min-h-screen w-full bg-white flex flex-col text-gray-800 overflow-x-hidden">
+      <div className="text-2xl font-bold py-8 px-8 -tracking-[0.5px]">
+        Uber
+      </div>
+      <div className="w-full px-8 flex flex-col items-center flex-1">
+        <div className="w-full max-w-md mx-auto p-4 bg-white rounded-xl">
+          <h1 className="text-4xl font-bold mb-3 -tracking-[0.5px] text-black">
+            Create your account
+          </h1>
+          <p className="text-lg mb-8 text-gray-600">
+            Sign up to start riding with Uber
+          </p>
 
-          <form onSubmit={handleSubmit} className="signup-form">
-            <div className="name-group">
-              <div className="form-group">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
+            <div className="flex gap-4">
+              <div className="flex-1">
                 <input
                   type="text"
                   name="firstName"
@@ -70,9 +75,10 @@ const UserSignUp = () => {
                   onChange={handleChange}
                   placeholder="First name"
                   required
+                  className="w-full px-4 py-4 border border-gray-200 rounded-lg bg-white text-black text-base transition-all focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                 />
               </div>
-              <div className="form-group">
+              <div className="flex-1">
                 <input
                   type="text"
                   name="lastName"
@@ -80,10 +86,11 @@ const UserSignUp = () => {
                   onChange={handleChange}
                   placeholder="Last name"
                   required
+                  className="w-full px-4 py-4 border border-gray-200 rounded-lg bg-white text-black text-base transition-all focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                 />
               </div>
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="email"
                 name="email"
@@ -91,9 +98,10 @@ const UserSignUp = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 required
+                className="w-full px-4 py-4 border border-gray-200 rounded-lg bg-white text-black text-base transition-all focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
                 type="password"
                 name="password"
@@ -101,20 +109,21 @@ const UserSignUp = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 required
+                className="w-full px-4 py-4 border border-gray-200 rounded-lg bg-white text-black text-base transition-all focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
               />
             </div>
 
-            <button type="submit" className="signup-button">
+            <button type="submit" className="w-full py-4 mt-4 bg-black text-white text-base font-medium rounded-lg transition-all hover:bg-gray-800">
               Sign Up
             </button>
           </form>
 
-          <div className="auth-options">
-            <Link to="/user-login" className="auth-link">
+          <div className="text-center mt-6">
+            <Link to="/user-login" className="inline-block text-black text-sm transition-colors hover:text-gray-600 py-3">
               Already have an account? Log in
             </Link>
-            <div className="divider">or</div>
-            <Link to="/captain-signup" className="captain-link">
+            <div className="text-sm text-gray-500 my-4">or</div>
+            <Link to="/captain-signup" className="inline-block text-black text-sm transition-colors hover:text-gray-600 py-3">
               Register as a Driver
             </Link>
           </div>
