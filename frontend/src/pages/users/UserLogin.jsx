@@ -85,8 +85,8 @@ const UserLogin = () => {
               Don't have an account? Sign up
             </Link>
             <div className="text-sm text-gray-500 my-4">or</div>
-            <Link to="/captain-login" className="inline-block text-black text-sm transition-colors hover:text-gray-600 py-3">
-              Sign in as a Driver instead
+            <Link to="/captain-login" className="inline-block text-black text-sm transition-colors hover:text-gray-600 p-3 bg-gray-200 rounded-lg">
+              Sign in as a Driver
             </Link>
           </div>
         </div>

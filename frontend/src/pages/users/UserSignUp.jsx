@@ -123,7 +123,7 @@ const UserSignUp = () => {
               Already have an account? Log in
             </Link>
             <div className="text-sm text-gray-500 my-4">or</div>
-            <Link to="/captain-signup" className="inline-block text-black text-sm transition-colors hover:text-gray-600 py-3">
+            <Link to="/captain-signup" className="inline-block text-black text-sm transition-colors hover:text-gray-600 p-3 bg-gray-200 rounded-lg ">
               Register as a Driver
             </Link>
           </div>

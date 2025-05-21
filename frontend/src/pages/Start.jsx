@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 
 const Start = () => {
   return (
-    <div className="min-h-screen w-full bg-black bg-opacity-60 bg-[url('https://plus.unsplash.com/premium_photo-1682834983265-27a10ba5232c?q=80&w=1935&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay flex flex-col text-white overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col text-white overflow-hidden" style={{backgroundImage: "url('https://img.freepik.com/premium-photo/with-awake-city-colorful-signal-light-silver-color-stand_1109554-1545.jpg')", backgroundSize: "cover", backgroundPosition: 'center', backgroundBlendMode: 'overlay', backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+
+{/* bg-black bg-opacity-60 bg-[url('')] bg-cover bg-center bg-blend-overlay */}
+
       <div className="text-4xl md:text-6xl font-bold p-8 md:p-8 tracking-tight">
         Uber
       </div>
-      <div className="flex-1 flex flex-col justify-center px-8 max-w-2xl">
+      <div className="flex-1 flex flex-col justify-center px-8 max-w-2xl ">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight">
           Get Started with Uber
         </h1>
