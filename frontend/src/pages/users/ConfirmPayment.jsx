@@ -65,7 +65,7 @@ const ConfirmPayment = () => {
               <MdCurrencyExchange
                 style={{ display: "inline", marginRight: "15px" }}
               />
-              Make Payment to Confirm
+              Pay Now
             </p>
           </button>
         </div>
