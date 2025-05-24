@@ -4,6 +4,7 @@ import FinishRide from "../../components/FinishRide";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { TiArrowSortedUp } from "react-icons/ti";
+import { MdLogout } from "react-icons/md";
 
 const CaptainRiding = () => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
@@ -33,10 +34,10 @@ const CaptainRiding = () => {
           alt=""
         />
         <Link
-          to="/captain-home"
+          to="/CaptainHome"
           className=" h-10 w-10 bg-white flex items-center justify-center rounded-full"
         >
-          
+          <MdLogout />
           {/* <i className="text-lg font-medium ri-logout-box-r-line"></i> */}
         </Link>
       </div>
