@@ -7,7 +7,6 @@ async function calculateFare(pickup, destination) {
         throw new Error("Pickup and destination addresses are required");
     }
     const DistanceTime = await mapService.getDistanceTime(pickup, destination)
-    console.log(DistanceTime);
     const baseFare = {
         auto: 30,
         car: 75,
@@ -29,7 +28,6 @@ async function calculateFare(pickup, destination) {
         car: baseFare.car + ((DistanceTime.distance.value / 1000) * perKm.car) + ((DistanceTime.duration.value / 60) * perMinute.car),
         moto: baseFare.moto + ((DistanceTime.distance.value / 1000) * perKm.moto )+ ((DistanceTime.duration.value / 60) * perMinute.moto)
     }
-    console.log(fare)
     return fare;
 }
 
