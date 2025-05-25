@@ -2,8 +2,6 @@ import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import { TiArrowSortedDown } from "react-icons/ti";
 
-
-
 const Vehicle_Panel = (props) => {
   return (
     <div className="bg-white">
@@ -18,7 +16,11 @@ const Vehicle_Panel = (props) => {
       <h3 className="text-2xl font-semibold mb-5">Choose a Vehicle</h3>
 
       <div
-        onClick={() => {props.setConfirmRidePanel(true);}}
+        onClick={() => {
+          props.setConfirmRidePanel(true);
+          props.setVehicleType("car");
+          props.setVehiclePanel(false);
+        }}
         className="flex items-center justify-between border-1 active:border-black active:border-2 mb-2 rounded-xl w-full p-3"
       >
         <img
@@ -28,16 +30,25 @@ const Vehicle_Panel = (props) => {
         />
         <div className="ml-5 w-1/2">
           <h4 className="font-medium text-base">UberGo</h4>
-          <span><FaRegUser style={{ display: "inline" }} /> 4</span>
+          <span>
+            <FaRegUser style={{ display: "inline" }} /> 4
+          </span>
           <h5 className="font-medium text-sm">2 mins away</h5>
-          <p className="font-normal text-xs text-gray-600">Affordable, compact rides</p>
+          <p className="font-normal text-xs text-gray-600">
+            Affordable, compact rides
+          </p>
         </div>
-        <h2 className="text-lg font-semibold">$ {props.fare?.fare?.car || "fare.."}</h2>
+        <h2 className="text-lg font-semibold">
+          $ {props.fare?.fare?.car || "fare.."}
+        </h2>
       </div>
 
       <div
         onClick={() => {
-            props.setConfirmRidePanel(true);
+          props.setConfirmRidePanel(true);
+          props.setVehicleType("moto");
+
+          props.setVehiclePanel(false);
         }}
         className="flex items-center justify-between border-1 active:border-black active:border-2 mb-2 rounded-xl w-full p-3"
       >
@@ -48,16 +59,25 @@ const Vehicle_Panel = (props) => {
         />
         <div className="ml-5 w-1/2">
           <h4 className="font-medium text-base">UberMoto</h4>
-          <span><FaRegUser style={{ display: "inline" }} /> 1</span>
+          <span>
+            <FaRegUser style={{ display: "inline" }} /> 1
+          </span>
           <h5 className="font-medium text-sm">3 mins away</h5>
-          <p className="font-normal text-xs text-gray-600">Affordable motorcycle rides</p>
+          <p className="font-normal text-xs text-gray-600">
+            Affordable motorcycle rides
+          </p>
         </div>
-        <h2 className="text-lg font-semibold">$ {props.fare?.fare?.moto || "fare.."}</h2>
+        <h2 className="text-lg font-semibold">
+          $ {props.fare?.fare?.moto || "fare.."}
+        </h2>
       </div>
 
       <div
         onClick={() => {
-            props.setConfirmRidePanel(true);
+          props.setConfirmRidePanel(true);
+          props.setVehicleType("auto");
+
+          props.setVehiclePanel(false);
         }}
         className="flex items-center justify-between border-1 active:border-black active:border-2 mb-2 rounded-xl w-full p-3"
       >
@@ -68,11 +88,17 @@ const Vehicle_Panel = (props) => {
         />
         <div className="ml-5 w-1/2">
           <h4 className="font-medium text-base">UberAuto</h4>
-          <span><FaRegUser style={{ display: "inline" }} /> 3</span>
+          <span>
+            <FaRegUser style={{ display: "inline" }} /> 3
+          </span>
           <h5 className="font-medium text-sm">3 mins away</h5>
-          <p className="font-normal text-xs text-gray-600">Affordable Auto rides</p>
+          <p className="font-normal text-xs text-gray-600">
+            Affordable Auto rides
+          </p>
         </div>
-        <h2 className="text-lg font-semibold">$ {props.fare?.fare?.auto || "fare.."}</h2>
+        <h2 className="text-lg font-semibold">
+          $ {props.fare?.fare?.auto || "fare.."}
+        </h2>
       </div>
     </div>
   );

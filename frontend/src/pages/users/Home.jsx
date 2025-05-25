@@ -27,8 +27,14 @@ const Home = () => {
   const [pickUpSuggestions, setPickUpSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [activeField, setActiveField] = useState("");
-  const [fare, setFare] = useState({});
-  const [vehicleType, setVehicleType] = useState("");
+  const [fare, setFare] = useState({
+    fare: {
+      car: "0",
+      moto: "0",
+      auto: "0",
+    },
+  });
+  const [vehicleType, setVehicleType] = useState("car");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -158,8 +164,8 @@ const Home = () => {
         `${import.meta.env.VITE_BASE_URL}/ride/get-fare`,
         {
           params: {
-            pickup: (pickup),
-            destination: (destination),
+            pickup: pickup,
+            destination: destination,
           },
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -168,7 +174,6 @@ const Home = () => {
       );
       // console.log(response)
       setFare(response.data);
-
     } catch (error) {
       console.error("Error fetching fare:", error);
       alert("Failed to fetch fare. Please check your locations and try again.");
@@ -180,21 +185,25 @@ const Home = () => {
   }
 
   async function createRide() {
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/rides/create`,
-      {
-        pickup,
-        destination,
-        vehicleType,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/ride/create`,
+        {
+          pickup,
+          destination,
+          vehicleType,
         },
-      }
-    );
-
-    console.log(response.data);
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error creating ride:", error);
+      alert("Failed to create ride. Please try again.");
+    }
   }
 
   return (
@@ -273,7 +282,10 @@ const Home = () => {
             </form>
           </div>
 
-          <div ref={panelRef} className="relative bg-[#f4f5f6] overflow-y-auto">
+          <div
+            ref={panelRef}
+            className="relative bg-[#f4f5f6] overflow-y-auto z-10"
+          >
             <SearchPanel
               suggestions={
                 activeField === "pickup"
@@ -297,25 +309,38 @@ const Home = () => {
               setConfirmRidePanel={setConfirmRidePanel}
               fare={fare}
               setFare={setFare}
+              setVehicleType={setVehicleType}
             />
           </div>
 
           <div
             ref={confirmRidePanelRef}
-            className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
+            className="fixed w-full z-[5] bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
           >
             <ConfirmRidePanel
               setConfirmRidePanel={setConfirmRidePanel}
               setVehicleFound={setVehicleFound}
               setVehiclePanel={setVehiclePanel}
+              createRide={createRide}
+              pickup={pickup}
+              destination={destination}
+              fare={fare}
+              vehicleType={vehicleType}
             />
           </div>
 
           <div
             ref={VehicleFoundRef}
-            className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
+            className="fixed w-full z-[3] bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
           >
-            <LookingForDriver setVehicleFound={setVehicleFound} />
+            <LookingForDriver 
+              setVehicleFound={setVehicleFound}
+              setConfirmRidePanel={setConfirmRidePanel}
+              pickup={pickup}
+              destination={destination}
+              fare={fare}
+              vehicleType={vehicleType}
+            />
           </div>
 
           <div

@@ -26,28 +26,28 @@ const ConfirmRide = (props) => {
         />
         <div className="w-full mt-5">
           <div className="flex items-center gap-5 p-3 border-b-2">
-            <FaRegUser style={{ display: "inline" }} />
+            <FaRegUser  style={{width:"20px"}}/>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                PickUp Location
+              <h3 className="text-lg font-medium w-[95%] ml-3">PickUp Location</h3>
+              <p className="text-sm -mt-1 ml-3 text-gray-600">
+                {props.pickup}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
             <FaLocationArrow />
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm -mt-1 text-gray-600">
-               Destination
+              <h3 className="text-lg font-medium ml-3 w-[95%]">Destination</h3>
+              <p className="text-sm -mt-1 text-gray-600 ml-3">
+               {props.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <MdCurrencyExchange />
             <div>
-              <h3 className="text-lg font-medium">₹193.20 </h3>
-              <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
+              <h3 className="text-lg font-medium ml-3">₹ {props.fare?.fare[props.vehicleType] || ""} </h3>
+              <p className="text-sm -mt-1 text-gray-600  ml-3">Cash</p>
             </div>
           </div>
         </div>
@@ -57,6 +57,7 @@ const ConfirmRide = (props) => {
           props.setVehicleFound(true);
           props.setConfirmRidePanel(false);
           props.setVehiclePanel(false);
+          props.createRide()
         }}>
           Confirm
         </button>
