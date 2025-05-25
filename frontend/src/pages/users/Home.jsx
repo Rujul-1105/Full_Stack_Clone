@@ -27,7 +27,7 @@ const Home = () => {
   const [pickUpSuggestions, setPickUpSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [activeField, setActiveField] = useState("");
-  const [fare, setFare] = useState(0);
+  const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState("");
 
   const submitHandler = (e) => {
@@ -72,8 +72,11 @@ const Home = () => {
 
   useGSAP(() => {
     if (panelOpen) {
+      const screenHeight = window.innerHeight;
+      const maxHeight = screenHeight < 600 ? "60%" : "70%";
+
       gsap.to(panelRef.current, {
-        height: "70%",
+        height: maxHeight,
         padding: 24,
       });
       gsap.to(panelCloseRef.current, {
@@ -141,21 +144,39 @@ const Home = () => {
   );
 
   async function findTrip() {
+    if (!pickup || !destination) {
+      alert("Please enter both pickup and destination locations.");
+      return;
+    }
     setVehiclePanel(true);
     setPanelOpen(false);
+    try {
+      console.log("Pickup:", pickup);
+      console.log("Destination:", destination);
 
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
-      {
-        params: { pickup, destination },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/ride/get-fare`,
+        {
+          params: {
+            pickup: (pickup),
+            destination: (destination),
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      // console.log(response)
+      setFare(response.data);
+
+    } catch (error) {
+      console.error("Error fetching fare:", error);
+      alert("Failed to fetch fare. Please check your locations and try again.");
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Status:", error.response.status);
       }
-    );
-
-    console.log(response.data);
-    setFare(response.data);
+    }
   }
 
   async function createRide() {
@@ -178,7 +199,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="h-screen relative ">
+      <div className="h-screen relative overflow-hidden">
         <img
           className="w-16 absolute left-5 top-5"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/800px-Uber_logo_2018.svg.png"
@@ -194,7 +215,11 @@ const Home = () => {
         </div>
 
         <div className="flex flex-col justify-end absolute w-full h-screen top-0 ">
-          <div className="relative bg-white p-6 h-[45vh] sm:h-[35%]">
+          <div
+            className={`relative bg-white p-6 transition-all duration-300 ${
+              panelOpen ? "min-h-[300px] max-h-[45vh]" : "h-[35vh] sm:h-[30%]"
+            }`}
+          >
             <h4 className="font-semibold text-2xl my-2">Find a trip</h4>
             <div
               ref={panelCloseRef}
@@ -207,7 +232,7 @@ const Home = () => {
             </div>
 
             <form
-              className="relative py-1 "
+              className="relative py-1"
               action=""
               onSubmit={(e) => {
                 submitHandler(e);
@@ -248,7 +273,7 @@ const Home = () => {
             </form>
           </div>
 
-          <div ref={panelRef} className="relative h-0 bg-[#f4f5f6]">
+          <div ref={panelRef} className="relative bg-[#f4f5f6] overflow-y-auto">
             <SearchPanel
               suggestions={
                 activeField === "pickup"
@@ -270,6 +295,8 @@ const Home = () => {
             <Vehicle_Panel
               setVehiclePanel={setVehiclePanel}
               setConfirmRidePanel={setConfirmRidePanel}
+              fare={fare}
+              setFare={setFare}
             />
           </div>
 

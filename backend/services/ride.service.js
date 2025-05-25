@@ -24,13 +24,14 @@ async function calculateFare(pickup, destination) {
     } 
 
     const fare = {
-        auto: baseFare.auto + ((DistanceTime.distance.value / 1000) * perKm.auto) + ((DistanceTime.duration.value / 60) * perMinute.auto),
-        car: baseFare.car + ((DistanceTime.distance.value / 1000) * perKm.car) + ((DistanceTime.duration.value / 60) * perMinute.car),
-        moto: baseFare.moto + ((DistanceTime.distance.value / 1000) * perKm.moto )+ ((DistanceTime.duration.value / 60) * perMinute.moto)
+        auto: parseFloat((baseFare.auto + ((DistanceTime.distance.value / 1000) * perKm.auto) + ((DistanceTime.duration.value / 60) * perMinute.auto)).toFixed(2)),
+        car: parseFloat((baseFare.car + ((DistanceTime.distance.value / 1000) * perKm.car) + ((DistanceTime.duration.value / 60) * perMinute.car)).toFixed(2)),
+        moto: parseFloat((baseFare.moto + ((DistanceTime.distance.value / 1000) * perKm.moto) + ((DistanceTime.duration.value / 60) * perMinute.moto)).toFixed(2))
     }
     return fare;
 }
 
+module.exports.calculateFare = calculateFare;
 
 function getOTP(num){
     const otp = crypto.randomInt(Math.pow(10, num - 1), Math.pow(10, num)).toString();
